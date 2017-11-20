@@ -1,12 +1,12 @@
 ﻿编译步骤
 
-by和哥 2015-2016
+by bf 2015-2016
 
 准备
 ======
 1 下载代码
 
-git clone https://github.com/sunwangme/togo.git
+git clone https://github.com/lianghuabao/togo.git
 
 2 编译x86 release/debug
 用vs2015打开ta-lib\c\ide\vs2015\dll_proj\tablib.sln，
