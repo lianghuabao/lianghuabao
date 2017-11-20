@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+package bfdatafeed;
+option go_package = "github.com/sunwangme/bfgo/api/bfdatafeed";
+
+import "bfgateway.proto";
+
+//============================
+
+// Bar周期类型，和文华财经保持一致
+enum BfBarPeriod{
+    PERIOD_UNKNOWN = 0;         // 未知
+    PERIOD_S01 = 1;             // 1秒
+    PERIOD_S03 = 2;             // 3秒
+    PERIOD_S05 = 3;             // 5秒
+    PERIOD_S10 = 4;             // 10秒
+    PERIOD_S15 = 5;             // 15秒
+    PERIOD_S30 = 6;             // 30秒
+    PERIOD_M01 = 7;             // 1分
+    PERIOD_M03 = 8;             // 3分
+    PERIOD_M05 = 9;             // 5分
+    PERIOD_M10 = 10;            // 10分
+    PERIOD_M15 = 11;            // 15分
+    PERIOD_M30 = 12;            // 30分
+    PERIOD_H01 = 13;            // 1小时
+    PERIOD_H02 = 14;            // 2小时
+    PERIOD_H03 = 15;            // 3小时
+    PERIOD_H04 = 16;            // 4小时
+    PERIOD_D01 = 17;            // 1天
+    PERIOD_W01 = 18;            // 1周
+    PERIOD_X01 = 19;            // 1月
+}
+
+// Bar行情数据类
+message BfBarData{
+
+    // 代码相关
+    string symbol = 1;          // 合约代码
+    string exchange = 2;        // 交易所代码
+
+    // 周期   
+    BfBarPeriod period = 3;       
+    
+    // 成交数据
+    string actionDate = 4;      // 日期 20151009
+    string barTime = 5;         // 时间 11:20:56
+    int32 volume = 6;           // 今天总成交量
+    double openInterest = 7;    // 持仓量
+    int32 lastVolume = 8;       // 本bar成交量，本笔增减
+    
+    // OHLC
+    double openPrice = 9;       // 开盘价
+    double highPrice = 10;      // 最高价
+    double lowPrice = 11;       // 最低价
+    double closePrice = 12;     // 收盘价 
+}
+
+message BfGetTickReq{
+    // 代码编号相关
+    string symbol = 1;              // 合约代码
+    string exchange = 2;            // 交易所代码
+
+    string toDate = 3;              // 截止日期
+    string toTime = 4;              // 截止时间
+    int32 count = 5;                // 获取条数
+ 
+    string fromDate = 6;            // 开始日期
+    string fromTime = 7;            // 开始时间
+}
+
+message BfGetBarReq{
+    // 代码编号相关
+    string symbol = 1;              // 合约代码
+    string exchange = 2;            // 交易所代码
+
+    BfBarPeriod period = 3;         // 周期
+    
+    string toDate = 4;              // 截止日期
+    string toTime = 5;              // 截止时间
+    int32 count = 6;                // 获取条数
+
+    string fromDate = 7;            // 开始日期
+    string fromTime = 8;            // 开始时间
+}
+
+message BfDeleteTickReq{
+    // 代码编号相关
+    string symbol = 1;              // 合约代码
+    string exchange = 2;            // 交易所代码
+
+    string toDate = 3;              // 截止日期
+    string toTime = 4;              // 截止时间
+    
+    string fromDate = 5;            // 开始日期
+    string fromTime = 6;            // 开始时间
+}
+
+message BfDeleteBarReq{
+    // 代码编号相关
+    string symbol = 1;              // 合约代码
+    string exchange = 2;            // 交易所代码
+
+    BfBarPeriod period = 3;         // 周期
+    
+    string toDate = 4;              // 截止日期
+    string toTime = 5;              // 截止时间
+
+    string fromDate = 6;            // 开始日期
+    string fromTime = 7;            // 开始时间
+}
+
+message BfDeleteContractReq{
+    // 代码编号相关
+    string symbol = 1;              // 合约代码，
+    string exchange = 2;            // 交易所代码
+}
+
+//============================
+
+// 支撑交易的数据服务，交易前从主数据库导入初始化数据=
+service BfDatafeedService{
+
+    // 活跃检测
+    rpc Ping(bfgateway.BfPingData) returns (bfgateway.BfPingData) {}
+
+    // 保存tick
+    rpc InsertTick(bfgateway.BfTickData) returns (bfgateway.BfVoid) {}
+    // 保存bar
+    rpc InsertBar(BfBarData) returns (bfgateway.BfVoid) {}
+    // 保存contract
+    rpc InsertContract(bfgateway.BfContractData) returns (bfgateway.BfVoid) {}
+
+    // 获取tick,支持count+to，支持from+count，支持from+to三种模式，按时间顺序返回
+    rpc GetTick(BfGetTickReq) returns (stream bfgateway.BfTickData){}
+    // 获取bar,,支持count+to，支持from+count，支持from+to三种模式，按时间顺序返回
+    rpc GetBar(BfGetBarReq) returns (stream BfBarData) {}    
+    // 获取contract, 支持* *获取全部订阅合约
+    rpc GetContract(bfgateway.BfGetContractReq) returns (stream bfgateway.BfContractData) {}
+
+    // 删除tick，支持from+to模式
+    rpc DeleteTick(BfDeleteTickReq) returns (bfgateway.BfVoid) {}
+    // 删除bar，支持from+to模式
+    rpc DeleteBar(BfDeleteBarReq) returns (bfgateway.BfVoid) {}
+    // 删除contract，支持* *删除全部合约
+    rpc DeleteContract(BfDeleteContractReq) returns (bfgateway.BfVoid) {}
+    
+    // 重置数据库
+    rpc CleanAll(bfgateway.BfVoid) returns (bfgateway.BfVoid) {}
+}
+
+//============================

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package bfkv;
+option go_package = "github.com/sunwangme/bfgo/api/bfkv";
+
+import "bfgateway.proto";
+import "google/protobuf/any.proto";
+
+//============================
+
+//
+//
+// Kv服务
+//
+service BfKvService{    
+    // 活跃检测
+    rpc Ping(bfgateway.BfPingData) returns (bfgateway.BfPingData) {}
+    
+    // stream测试
+    rpc PingStreamCS(stream google.protobuf.Any) returns (stream google.protobuf.Any) {}
+    rpc PingStreamC(stream google.protobuf.Any) returns (google.protobuf.Any) {}
+    rpc PingStreamS(google.protobuf.Any) returns (stream google.protobuf.Any) {}
+
+    // Kv服务
+    rpc SetKv(bfgateway.BfKvData) returns (bfgateway.BfVoid){}
+    rpc GetKv(bfgateway.BfKvData) returns (bfgateway.BfKvData){}
+}
+
+//============================
