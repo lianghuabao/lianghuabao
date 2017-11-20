@@ -1,0 +1,16 @@
+build-*/
+*.pro.user
+*.bak
+*.pyc
+*.pyo
+*.autosave
+~*
+third_party/ctp/bin/
+third_party/ctp/lib/
+third_party/grpc/bin/
+third_party/grpc/lib/
+third_party/talib/bin/
+third_party/talib/lib/
+sdk/python/
+sdk/github.com/
+sdk/cpp/
