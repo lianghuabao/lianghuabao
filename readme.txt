@@ -3,9 +3,13 @@
 
 
 简介
-======
-量化宝BFtrader是由C++大神编写并经许可由量化营lianghuaying.com开源的量化交易中间件，bftrader的bf，是be friends，聚友量化的本意，通过网络汇聚量友共同完善一起做浪花交易。
+====
+
+量化宝BFtrader是由C++大神老王编写，并经许可由量化营lianghuaying.com开源的适用于python 和 golang编写的量化策略的程序化交易框架平台或中间件，bftrader的bf，是be friends，聚友量化的本意，通过网络汇聚量友共同完善一起做量化交易。
 bftrader支持手动交易，也支持程序化交易，目前只支持ctp！
+开源在
+http://github.com/lianghuabao/lianghuabao
+供大家学习和个人非商业使用。请大家共同完善。
 
 由gateway/网关+datafeed/数据+strategy/策略等几部分组成，
 这里是gateway/网关+datafeed/数据的c++开源实现。
