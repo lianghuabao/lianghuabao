@@ -23,7 +23,7 @@ https://github.com/lianghuabao/bfgo
 主程序编译(c++)
 ======
 你没有必要自己编译，这里提供了预编译好的包：
-下载地址: https://github.com/lianghuabao/bftrader/releases
+下载地址: https://github.com/lianghuabao/lianghuabao/releases
 下载地址: http://pan.baidu.com/s/
 
 如果你喜欢浪费时间，可以参考下面文档：
