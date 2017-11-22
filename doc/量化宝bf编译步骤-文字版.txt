@@ -17,7 +17,7 @@ qt-opensource-windows-x86-msvc2015_32-5.6.0.exe
 4. 下载源代码，解压到c:/projects/bftrader目录
 https://github.com/lianghuabao/lianghuabao/releases
 
-5. 下载支持库，解压到c:/projects/bftrader/third_party目录
+5. 下载支持库，解压到c:/projects/lianghuabao/bftrader/third_party目录
 http://pan.baidu.com/s/1nvgrNst
 third_party.7z
 添加目录到系统PATH：
