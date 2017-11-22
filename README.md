@@ -11,7 +11,7 @@ QQ交流群：571255193，点击链接加入群【量化宝基于C++CTP架构适
 lianghuabao bf支持手动交易，也支持程序化交易，目前只支持ctp！
 开源在
 http://github.com/lianghuabao/lianghuabao
-版权所有，可供大家学习和个人非商业使用。请大家共同完善。
+版权所有，可供大家学习和个人非商业使用。请大家共同完善，新增股票 期权 数字货币等接口。
 
 由gateway/网关+datafeed/数据+strategy/策略等几部分组成，
 这里是gateway/网关+datafeed/数据的c++开源实现。
