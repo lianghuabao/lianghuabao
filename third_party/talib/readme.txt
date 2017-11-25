@@ -1,10 +1,10 @@
 ﻿编译步骤
 
-by bf 2015-2016
+ lianghuabao bf 2015-2016
 
 准备
 ======
-1 下载代码
+1  下载代码
 
 git clone https://github.com/lianghuabao/togo.git
 

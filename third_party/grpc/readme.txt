@@ -1,6 +1,6 @@
 ﻿编译步骤
 
-by bf lianghuabao 2015-2016
+by lianghuabao bf 2015-2016
 
 准备
 ======
